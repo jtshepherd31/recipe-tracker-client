@@ -31,6 +31,10 @@ const onSignIn = function (event) {
 }
 
 const onShowSignIn = function (event) {
+  $('#sign-in-modal').modal('toggle')
+}
+
+const onShowChangePassword = function (event) {
   $('#myModal').modal('toggle')
 }
 
@@ -58,5 +62,6 @@ module.exports = {
   onSignIn,
   onSignOut,
   onChangePassword,
-  onShowSignIn
+  onShowSignIn,
+  onShowChangePassword
 }

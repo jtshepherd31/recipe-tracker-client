@@ -12,10 +12,10 @@ $(() => {
   // add auth click events
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
-  $('#change-password').on('click', authEvents.onChangePassword)
-  $('#sign-out').on('click', authEvents.onSignOut)
   $('#sign-in-submit').on('click', authEvents.onShowSignIn)
 
   // add navbar click events
+  $('#change-password').on('submit', authEvents.onChangePassword)
+  $('#sign-out').on('click', authEvents.onSignOut)
   // add main screen tab click events
 })

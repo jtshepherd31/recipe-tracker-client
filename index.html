@@ -16,10 +16,10 @@
   <!-- add sign in screen that disappears after sign in -->
   <section id="before-sign-in">
     <div id="sign-in-screen">
-      <button type="button" class="submit-button" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="submit-button" data-toggle="modal" data-target="#sign-in-modal">
         Sign In
       </button>
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -68,7 +68,8 @@
     <div class="nav-bar">
       <h3>Nav Bar</h3>
       <button id="sign-out" class="submit-button" type="submit">Sign Out</button>
-      <button type="button" class="submit-button" data- toggle="modal" data-target="#myModal">Change Password</button>
+
+      <button type="button" id="change-password-button" class="submit-button" data-toggle="modal" data-target="#myModal">Change Password</button>
 
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

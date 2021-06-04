@@ -23,13 +23,13 @@ const signUpFailure = function () {
 
 // sign in success and failure
 const signInSuccess = function (res) {
-  $('sign-in').trigger('reset')
   store.user = res.user
   $('#messaging').text('Signed in! Welcome!')
   // hide the sign in modal
   $('#before-sign-in').hide()
   $('#after-sign-in').show()
   // $('#myModal').hide()
+  $('sign-in').trigger('reset')
 }
 
 const signInFailure = function () {
@@ -51,7 +51,7 @@ const changePasswordSuccess = function (res) {
 }
 
 const changePasswordFailure = function () {
-  $('#change-password-messaging').text('Passwords do not match, please try again.')
+  $('#change-password-messaging').text('Incorrect Password.')
   $('#change-password-messaging').css('color', 'red')
   setTimeout(function () {
     $('#change-password-messaging').text('')
