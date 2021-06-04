@@ -1,17 +1,108 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<head>
+  <title>Recipe Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <h1>Browser Template</h1>
-    </body>
+<body>
+  <!-- create layout of divs -->
+  <!-- add sign in screen that disappears after sign in -->
+  <section id="before-sign-in">
+    <div id="sign-in-screen">
+      <button type="button" class="submit-button" data-toggle="modal" data-target="#myModal">
+        Sign In
+      </button>
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-title">Welcome!</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="sign-in">
+                <h4>Sign In!</h4>
+                <hr width="90%" color="#EE4B2B">
+                <div class="form-group">
+                  <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input name="credentials[password]" required type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <button id="sign-in-submit" class="submit-button" type="submit">Sign in</button>
+                </div>
+              </form>
+              <form id="sign-up">
+                <h4>Sign Up!</h4>
+                <hr width="90%" color="#EE4B2B">
+                <div class="form-group">
+                  <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                  <input name="credentials[password]" required type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input name="credentials[password_confirmation]" type="password" class="form-control" placeholder="Confirm Password">
+                </div>
+                <div class="form-group">
+                  <button class="submit-button" type="submit">Sign up</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="after-sign-in">
+    <div class="nav-bar">
+      <h3>Nav Bar</h3>
+      <button id="sign-out" class="submit-button" type="submit">Sign Out</button>
+      <button type="button" class="submit-button" data- toggle="modal" data-target="#myModal">Change Password</button>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-title">Change Password</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="change-password">
+                <div class="form-group">
+                    <input name="passwords[old]" required type="password" class="form-control" placeholder="Old Password">
+                </div>
+                <div class="form-group">
+                    <input name="passwords[new]" required type="password" class="form-control" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                  <button class="submit-button" type="submit">Submit</button>
+                  <p id="change-password-messaging"></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="left-panel">
+      <h3>Calorie Tracker</h3>
+    </div>
+    <div class="main-panel">
+      <h3>Main Panel</h3>
+    </div>
+  </section>
+
+</body>
+
 </html>
