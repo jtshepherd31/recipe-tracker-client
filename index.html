@@ -25,6 +25,7 @@
           Sign In
         </button>
       </div>
+      <p id="sign-out-messaging" class="sign-out-success"></p>
       <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -34,6 +35,9 @@
             </div>
             <div class="modal-body">
               <form id="sign-in">
+                <div>
+                  <p id="failure-sign-in-messaging"></p>
+                </div>
                 <h4>Sign In!</h4>
                 <hr width="90%" color="#425252">
                 <div class="form-group">
@@ -62,6 +66,7 @@
                 </div>
                 <div class="form-group">
                   <button class="submit-button" type="submit">Sign up</button>
+                  <p id="sign-up-messaging"></p>
                 </div>
               </form>
             </div>
@@ -74,6 +79,13 @@
   <section id="after-sign-in">
 
     <div class="nav-bar">
+      <div class="sign-in-success">
+        <p id="success-sign-in-messaging">
+        </p>
+      </div>
+      <div class="main-title">
+
+      </div>
       <div class="nav-bar-buttons">
         <button id="sign-out" class="submit-button nav-button" type="submit">Sign Out</button>
         <button type="button" id="change-password-button" class="submit-button nav-button" data-toggle="modal" data-target="#myModal">Change Password</button>
@@ -121,36 +133,65 @@
           <div role="tabpanel" class="tab-pane in active" id="create-a-recipe">
             <form class="create-a-recipe">
               <h1>Create a Recipe!</h1>
+              <section class="form-fields">
+                <div>
+                  <div class="cr-inputs">
+                    <h3>Recipe Name</h3>
+                    <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
+                  </div>
+                  <div class="cr-inputs">
+                    <h3>Calorie Amount</h3>
+                    <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
+                  </div>
+                  <div class="cr-inputs">
+                    <h3>Meal Type</h3>
+                    <select name="recipe[type]" class="meal-type">
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="dessert">Dessert</option>
+                      <option value="appetizer">Appetizer</option>
+                    </select>
+                  </div>
+                  <div class="cr-inputs">
+                    <h3>Cuisine Type</h3>
+                    <select name="recipe[cuisine]" class="cuisine">
+                      <option value="american">American</option>
+                      <option value="asian">Asian</option>
+                      <option value="caribbean">Caribbean</option>
+                      <option value="italian">Italian</option>
+                      <option value="mediterranean">Mediterranean</option>
+                      <option value="mexican">Mexican</option>
+                      <option value="southern">Southern</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="cr-inputs">
+                    <h3>Ingredients</h3>
+                    <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
+                  </div>
+                  <div class="cr-inputs">
+                    <h3>Instructions</h3>
+                    <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
+                  </div>
+                </div>
+              </section>
               <div class="cr-inputs">
-              <h3>Recipe Name</h3>
-              <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
+                <button type="submit" class="submit-recipe">Submit</button>
               </div>
-              <div class="cr-inputs">
-                <h3>Ingredients</h3>
-                <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
-              </div>
-              <div class="cr-inputs">
-                <h3>Instructions</h3>
-                <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
-              </div>
-              <div class="cr-inputs">
-                <h3>Calorie Amount</h3>
-                <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
-              </div>
-              <div class="cr-inputs">
-                <h3>Meal Type</h3>
-                <label for="meal-type">Choose a Meal Type</label>
-                <select name="recipe[type]" class="meal-type">
-                  <option value="breakfast">Breakfast</option>
-                  <option value="lunch">Lunch</option>
-                  <option value="dinner">Dinner</option>
-                  <option value="dessert">Dessert</option>
-                  <option value="appetizer">Appetizer</option>
-                </select>
-              </div>
-              <div class="cr-inputs">
-                <h3>Cuisine Type</h3>
-                <label for="cuisine">Choose a Cuisine</label>
+              <h4 id="create-message"></h4>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="recipes">
+            <h2 class="find-title">Find Your Recipes</h2>
+            <div class="index-recipes">
+              <div class="filter-column">
+                <input type="text" placeholder="Search" />
+                <button type="submit" class="search-button">
+                  <img class="search-icon" src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png">
+                </button>
                 <select name="recipe[cuisine]" class="cuisine">
                   <option value="american">American</option>
                   <option value="asian">Asian</option>
@@ -162,31 +203,12 @@
                   <option value="other">Other</option>
                 </select>
               </div>
-              <div class="cr-inputs">
-                <button type="submit" class="submit-recipe">Submit</button>
+              <div class="main-column">
+                <div>
+                  <h4 id="delete-messaging"></h4>
+                </div>
+                <ul id="recipes-list"></ul>
               </div>
-            </form>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="recipes">
-            <div class="index-recipes">
-              <h2>Find Your Recipes</h2>
-              <input type="text" placeholder="Search" />
-              <button type="submit" class="search-button">
-                <img class="search-icon" src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png">
-              </button>
-              <select name="recipe[cuisine]" class="cuisine">
-                <option value="american">American</option>
-                <option value="asian">Asian</option>
-                <option value="caribbean">Caribbean</option>
-                <option value="italian">Italian</option>
-                <option value="mediterranean">Mediterranean</option>
-                <option value="mexican">Mexican</option>
-                <option value="southern">Southern</option>
-                <option value="other">Other</option>
-              </select>
-              <ul id="recipes-list">
-
-              </ul>
               <div class="modal fade" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -197,8 +219,13 @@
                       <h4 class="modal-title" id="recipe-modal-title"></h4>
                     </div>
                     <div class="modal-body">
-                      <button class="delete-button"><img src=""</button>
-                      <button class="update-button">Update</button>
+                      <div class="edit-section">
+                        <h4 id="update-messaging"></h4>
+                        <div class="edit-buttons">
+                          <button class="delete-button"><img src=""</button>
+                          <button class="update-button">Update</button>
+                        </div>
+                      </div>
                       <section class="recipe-info">
                         <h5>Ingredients</h5>
                         <p id="recipe-ingredients"></p>

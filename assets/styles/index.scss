@@ -11,6 +11,7 @@ body {
 .modal-header {
   border: none;
   background-color: #254e58;
+  color: #effce8;
 }
 
 .close {
@@ -63,7 +64,14 @@ body {
   color: #effce8;
 }
 
+.find-title {
+  text-align: center;
+}
 
+.index-recipes {
+  display: flex;
+  justify-content: space-around;
+}
 
 #sign-in-screen {
   height: 100%;
@@ -89,10 +97,9 @@ body {
 }
 
 .nav-bar-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 70px;
+  position: absolute;
+  top: 13px;
+  right: 12px;
 }
 
 .title {
@@ -118,6 +125,20 @@ body {
   padding: 30px;
 }
 
+.form-fields {
+  display: flex;
+  justify-content: center;
+}
+
+textarea {
+  height: 120px;
+}
+
+.recipe-name, .calories, select {
+  height: 30px;
+  width: 100%;
+}
+
 .cr-inputs {
   margin: 30px
 }
@@ -130,6 +151,19 @@ body {
   background-color: #254e58;
   border-bottom: none;
 }
+
+#success-sign-in-messaging {
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  color: #effce8;
+}
+
+#sign-out-messaging, #sign-up-messaging #change-password-messaging {
+  margin: 30px;
+  color: #effce8;
+}
+
 
 .nav-tabs>li>a {
   margin-right: 2px;
@@ -147,9 +181,9 @@ body {
 }
 
 .nav>li>a {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
 }
 
 .search-button {
@@ -164,14 +198,14 @@ body {
 }
 
 a {
-    color: #337ab7;
-    text-decoration: none;
-    background-color: transparent;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: transparent;
 }
 
 a:-webkit-any-link {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .open-recipe-button {
