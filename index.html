@@ -16,20 +16,26 @@
   <!-- add sign in screen that disappears after sign in -->
   <section id="before-sign-in">
     <div id="sign-in-screen">
-      <button type="button" class="submit-button" data-toggle="modal" data-target="#sign-in-modal">
-        Sign In
-      </button>
+      <div class="welcome">
+        <h1>Welcome To Your Recipe Database</h1>
+        <h2>Please Sign In To Get Started</h2>
+      </div>
+      <div class="sign-in-button">
+        <button type="button" class="btn btn-5" data-toggle="modal" data-target="#sign-in-modal">
+          Sign In
+        </button>
+      </div>
       <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="modal-title">Welcome!</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modal-title"></h4>
             </div>
             <div class="modal-body">
               <form id="sign-in">
                 <h4>Sign In!</h4>
-                <hr width="90%" color="#EE4B2B">
+                <hr width="90%" color="#425252">
                 <div class="form-group">
                   <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
                 </div>
@@ -40,9 +46,10 @@
                   <button id="sign-in-submit" class="submit-button" type="submit">Sign in</button>
                 </div>
               </form>
+              <br>
               <form id="sign-up">
                 <h4>Sign Up!</h4>
-                <hr width="90%" color="#EE4B2B">
+                <hr width="90%" color="#425252">
                 <div class="form-group">
                   <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
                 </div>
@@ -65,14 +72,17 @@
   </section>
 
   <section id="after-sign-in">
-    <div class="nav-bar">
-      <button id="sign-out" class="submit-button" type="submit">Sign Out</button>
 
-      <button type="button" id="change-password-button" class="submit-button" data-toggle="modal" data-target="#myModal">Change Password</button>
+    <div class="nav-bar">
+      <div class="nav-bar-buttons">
+        <button id="sign-out" class="submit-button nav-button" type="submit">Sign Out</button>
+        <button type="button" id="change-password-button" class="submit-button nav-button" data-toggle="modal" data-target="#myModal">Change Password</button>
+      </div>
 
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
+
             <div class="modal-header">
               <h4 class="modal-title" id="modal-title">Change Password</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -95,18 +105,14 @@
         </div>
       </div>
     </div>
-    <div class="left-panel">
-      <h3>Calorie Tracker</h3>
-    </div>
     <div class="main-panel">
       <div>
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#create-a-recipe" aria-controls="home" role="tab" data-toggle="tab">Create a Meal</a></li>
+          <li role="presentation" id="create-recipes-tab"><a href="#create-a-recipe" aria-controls="home" role="tab" data-toggle="tab">Create a Recipe</a></li>
           <li role="presentation" id="recipes-tab"><a href="#recipes" aria-controls="profile" role="tab" data-toggle="tab">Recipes</a></li>
-          <li role="presentation"><a href="#shopping-list" aria-controls="messages" role="tab" data-toggle="tab">Shopping List</a></li>
-          <li role="presentation"><a href="#feature-recipes" aria-controls="settings" role="tab" data-toggle="tab">Feature Recipes</a></li>
+          <li role="presentation" id="feature-tab"><a href="#feature-recipes" aria-controls="settings" role="tab" data-toggle="tab">Featured Recipes</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -117,24 +123,24 @@
               <h1>Create a Recipe!</h1>
               <div class="cr-inputs">
               <h3>Recipe Name</h3>
-              <input name= "recipe[name]" type="text" required id="recipe-name" placeholder="Recipe Name">
+              <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
               </div>
               <div class="cr-inputs">
                 <h3>Ingredients</h3>
-                <input name="recipe[ingredients]" type="text" required id="ingredients" placeholder="Ingredients List">
+                <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
               </div>
               <div class="cr-inputs">
                 <h3>Instructions</h3>
-                <input name= "recipe[instructions]" type="text" required id="instructions" placeholder="Cooking Instructions">
+                <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
               </div>
               <div class="cr-inputs">
                 <h3>Calorie Amount</h3>
-                <input name= "recipe[calories]" id="calories" type="text" placeholder="Calorie Amount">
+                <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
               </div>
               <div class="cr-inputs">
                 <h3>Meal Type</h3>
                 <label for="meal-type">Choose a Meal Type</label>
-                <select name="recipe[type]" id="meal-type">
+                <select name="recipe[type]" class="meal-type">
                   <option value="breakfast">Breakfast</option>
                   <option value="lunch">Lunch</option>
                   <option value="dinner">Dinner</option>
@@ -145,7 +151,7 @@
               <div class="cr-inputs">
                 <h3>Cuisine Type</h3>
                 <label for="cuisine">Choose a Cuisine</label>
-                <select name="recipe[cuisine]" id="cuisine">
+                <select name="recipe[cuisine]" class="cuisine">
                   <option value="american">American</option>
                   <option value="asian">Asian</option>
                   <option value="caribbean">Caribbean</option>
@@ -157,20 +163,18 @@
                 </select>
               </div>
               <div class="cr-inputs">
-                <button type="submit" id="submit-recipe">Submit</button>
+                <button type="submit" class="submit-recipe">Submit</button>
               </div>
             </form>
           </div>
-
           <div role="tabpanel" class="tab-pane fade" id="recipes">
-
-              <p>Cuisine</p>
-
             <div class="index-recipes">
               <h2>Find Your Recipes</h2>
               <input type="text" placeholder="Search" />
-              <button type="submit"><i class="fa fa-search"></i></button>
-              <select name="recipe[cuisine]" id="cuisine">
+              <button type="submit" class="search-button">
+                <img class="search-icon" src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png">
+              </button>
+              <select name="recipe[cuisine]" class="cuisine">
                 <option value="american">American</option>
                 <option value="asian">Asian</option>
                 <option value="caribbean">Caribbean</option>
@@ -186,21 +190,79 @@
               <div class="modal fade" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="recipe-modal-title"></h4>
+                    <div class="modal-header x">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
+                    <div class="modal-header title">
+                      <h4 class="modal-title" id="recipe-modal-title"></h4>
+                    </div>
                     <div class="modal-body">
-                      <button class="delete-button">Delete</button>
+                      <button class="delete-button"><img src=""</button>
                       <button class="update-button">Update</button>
+                      <section class="recipe-info">
+                        <h5>Ingredients</h5>
+                        <p id="recipe-ingredients"></p>
+                        <h5>Instructions</h5>
+                        <p id="recipe-instructions"></p>
+                        <h5>Calories</h5>
+                        <p id="recipe-calories"></p>
+                        <h5>Type</h5>
+                        <p id="recipe-type"></p>
+                        <h5>Cuisine</h5>
+                        <p id="recipe-cuisine"></p>
+                      </section>
+                      <form id="update-form">
+                        <h1>Update a Recipe!</h1>
+                        <div class="cr-inputs">
+                        <h3>Recipe Name</h3>
+                        <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
+                        </div>
+                        <div class="cr-inputs">
+                          <h3>Ingredients</h3>
+                          <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
+                        </div>
+                        <div class="cr-inputs">
+                          <h3>Instructions</h3>
+                          <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
+                        </div>
+                        <div class="cr-inputs">
+                          <h3>Calorie Amount</h3>
+                          <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
+                        </div>
+                        <div class="cr-inputs">
+                          <h3>Meal Type</h3>
+                          <label for="meal-type">Choose a Meal Type</label>
+                          <select name="recipe[type]" class="meal-type">
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="dessert">Dessert</option>
+                            <option value="appetizer">Appetizer</option>
+                          </select>
+                        </div>
+                        <div class="cr-inputs">
+                          <h3>Cuisine Type</h3>
+                          <label for="cuisine">Choose a Cuisine</label>
+                          <select name="recipe[cuisine]" class="cuisine">
+                            <option value="american">American</option>
+                            <option value="asian">Asian</option>
+                            <option value="caribbean">Caribbean</option>
+                            <option value="italian">Italian</option>
+                            <option value="mediterranean">Mediterranean</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="southern">Southern</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </div>
+                        <div class="cr-inputs">
+                          <button type="submit" id="submit-update">Submit</button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="shopping-list">
-            Shopping List
           </div>
           <div role="tabpanel" class="tab-pane fade" id="feature-recipes">
             Featured Recipes

@@ -32,12 +32,11 @@ const findRecipe = function (recipeId) {
   })
 }
 
-const updateRecipe = function (data) {
-  console.log(data)
+const updateRecipe = function (data, recipeId) {
   return $.ajax({
     method: 'PATCH',
     data,
-    url: config.apiUrl + '/recipes/:id',
+    url: config.apiUrl + '/recipes/' + recipeId,
     headers: {
       Authorization: `Bearer ${store.user.token}`
     }

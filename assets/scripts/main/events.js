@@ -36,6 +36,10 @@ const onGetUserRecipes = function (event) {
 const onFindRecipe = function (event) {
   // prevent default
   event.preventDefault()
+  $('#update-form').hide()
+  $('.update-button').show()
+  $('.delete-button').show()
+  $('.recipe-info').show()
   // api request with then and catch
   api.findRecipe(event.target.id)
     .then(ui.findRecipeSuccess)
@@ -48,12 +52,42 @@ const onDeleteRecipe = function (event) {
   // api request with then and catch
   api.deleteRecipe(event.target.id)
     .then(ui.deleteRecipeSuccess)
+    .then((e) => {
+      api.getUserRecipes()
+        .then(ui.getUserRecipesSuccess)
+        .catch(ui.getUserRecipesFailure)
+    })
     .catch(ui.deleteRecipeFailure)
+}
+
+const onUpdateRecipe = function (event) {
+  // prevent default
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  const recipeId = $('#update-form .cr-inputs button').attr('id')
+  // api request with then and catch
+  api.updateRecipe(data, recipeId)
+    .then(() => {
+      api.findRecipe(recipeId)
+        .then(ui.findRecipeSuccess)
+        .catch(ui.findRecipeFailure)
+    })
+    .then(ui.updateRecipeSuccess)
+    .catch(ui.updateRecipeFailure)
+}
+
+const onShowUpdate = function () {
+  $('#update-form').show()
+  $('.update-button').hide()
+  $('.delete-button').hide()
+  $('.recipe-info').hide()
 }
 // module exports
 module.exports = {
   onSubmitRecipe,
   onGetUserRecipes,
   onFindRecipe,
-  onDeleteRecipe
+  onDeleteRecipe,
+  onUpdateRecipe,
+  onShowUpdate
 }

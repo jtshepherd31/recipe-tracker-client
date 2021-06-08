@@ -13,13 +13,18 @@ $(() => {
   // add auth click events
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
-  $('#sign-in-submit').on('click', authEvents.onShowSignIn)
 
   // add navbar click events
   $('#change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out').on('click', authEvents.onSignOut)
   // add main screen tab click events
-  $('#recipes-tab').on('click', mainEvents.onGetUserRecipes)
+  $('#recipes-tab').on('click', (e) => {
+    mainEvents.onGetUserRecipes(e)
+    $('#create-recipes-tab').removeClass('active')
+  })
+  $('#feature-tab').on('click', () => {
+    $('#create-recipes-tab').removeClass('active')
+  })
   $('.create-a-recipe').on('submit', mainEvents.onSubmitRecipe)
   $('#myTabs a').click(function (e) {
     e.preventDefault()
@@ -31,5 +36,10 @@ $(() => {
   })
   $('#recipes-list').on('click', mainEvents.onFindRecipe)
   $('.delete-button').on('click', mainEvents.onDeleteRecipe)
-  // $('.update-button').on('click', mainEvents.onUpdateRecipe)
+  $('.update-button').on('click', mainEvents.onShowUpdate)
+  $('#update-form').on('submit', mainEvents.onUpdateRecipe)
+  $('#create-recipes-tab').on('click', () => {
+    $('input').val('')
+    $('textarea').val('')
+  })
 })

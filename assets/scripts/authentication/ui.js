@@ -30,6 +30,8 @@ const signInSuccess = function (res) {
   $('#after-sign-in').show()
   // $('#myModal').hide()
   $('sign-in').trigger('reset')
+  $('#sign-in-modal').modal('toggle')
+  $('#create-recipes-tab').attr('class', 'active')
 }
 
 const signInFailure = function () {
