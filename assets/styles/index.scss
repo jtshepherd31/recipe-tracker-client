@@ -133,6 +133,8 @@ li {
 
 .modal-content {
   background-color: #254e58;
+  width: 800px;
+  padding: 25px;
 }
 
 .nav-button {
@@ -253,7 +255,7 @@ a:-webkit-any-link {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: scroll;
+  // overflow: scroll;
   height: 600px;
 }
 
@@ -418,4 +420,14 @@ input, select {
 
 .modal-header {
   justify-content: center;
+}
+
+.recipe-info-top {
+  margin-right: 50px
+}
+
+.modal-dialog {
+  max-width: 800px;
+  margin: auto;
+  margin-top: 50px;
 }
