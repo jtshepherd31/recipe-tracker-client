@@ -17,15 +17,13 @@ $(() => {
   // add navbar click events
   $('#change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out').on('click', authEvents.onSignOut)
+
   // add main screen tab click events
+  $('#favorite-tab').on('click', mainEvents.onShowFavorites)
   $('#recipes-tab').on('click', (e) => {
     mainEvents.onGetUserRecipes(e)
     $('#create-recipes-tab').removeClass('active')
   })
-  $('#feature-tab').on('click', () => {
-    $('#create-recipes-tab').removeClass('active')
-  })
-  $('.create-a-recipe').on('submit', mainEvents.onSubmitRecipe)
   $('#myTabs a').click(function (e) {
     e.preventDefault()
     // $(this).tab('show')
@@ -34,12 +32,25 @@ $(() => {
     $('#myTabs a:last').tab('show') // Select last tab
     $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
   })
-  $('#recipes-list').on('click', mainEvents.onFindRecipe)
-  $('.delete-button').on('click', mainEvents.onDeleteRecipe)
-  $('.update-button').on('click', mainEvents.onShowUpdate)
-  $('#update-form').on('submit', mainEvents.onUpdateRecipe)
   $('#create-recipes-tab').on('click', () => {
     $('input').val('')
     $('textarea').val('')
   })
+
+  $('.create-a-recipe').on('submit', mainEvents.onSubmitRecipe)
+  $('#recipes-list').on('click', mainEvents.onFindRecipe)
+  $('#favorite-recipes-list').on('click', (e) => {
+    mainEvents.onFindRecipe(e, true)
+  })
+  $('.delete-button').on('click', mainEvents.onDeleteRecipe)
+  $('.update-button').on('click', mainEvents.onShowUpdate)
+  $('#update-form').on('submit', mainEvents.onUpdateRecipe)
+  $('#favorite-button').on('click', mainEvents.onFavoriteRecipe)
+  $('#favorite-recipes-list').on('click', mainEvents.onFindRecipe)
+
+  $('.search-button').on('click', mainEvents.onRecipeSearch)
+  $('#filter-button').on('click', mainEvents.onFilterRecipes)
+  $('#clear-filter-button').on('click', mainEvents.onClearFilters)
+
+  $('.close').on('click', mainEvents.onCloseModal)
 })

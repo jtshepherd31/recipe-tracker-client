@@ -15,6 +15,7 @@ const onSubmitRecipe = function (event) {
   // get user data from form fields
   const data = getFormFields(event.target)
   data.recipe.owner = store.user._id
+  data.recipe.favorite = false
 
   // api request with then and catch
   api.submitRecipe(data)
@@ -33,24 +34,28 @@ const onGetUserRecipes = function (event) {
     .catch(ui.getUserRecipesFailure)
 }
 
-const onFindRecipe = function (event) {
+const onFindRecipe = function (event, favoriteTabActive) {
   // prevent default
   event.preventDefault()
+  // api request with then and catch
+  api.findRecipe(event.target.parentNode.id)
+    .then(favoriteTabActive ? ui.findFavoriteRecipeSuccess : ui.findRecipeSuccess)
+    .catch(ui.findRecipeFailure)
+}
+
+const onCloseModal = function () {
   $('#update-form').hide()
   $('.update-button').show()
   $('.delete-button').show()
   $('.recipe-info').show()
-  // api request with then and catch
-  api.findRecipe(event.target.id)
-    .then(ui.findRecipeSuccess)
-    .catch(ui.findRecipeFailure)
 }
 
 const onDeleteRecipe = function (event) {
   // prevent default
   event.preventDefault()
+  console.log(event.target)
   // api request with then and catch
-  api.deleteRecipe(event.target.id)
+  api.deleteRecipe(store.selectedRecipe._id)
     .then(ui.deleteRecipeSuccess)
     .then((e) => {
       api.getUserRecipes()
@@ -64,7 +69,10 @@ const onUpdateRecipe = function (event) {
   // prevent default
   event.preventDefault()
   const data = getFormFields(event.target)
-  const recipeId = $('#update-form .cr-inputs button').attr('id')
+  const recipeId = store.selectedRecipe._id
+  const isFavorite = $('#favorite-button').hasClass('favorite')
+
+  data.recipe.favorite = isFavorite
   // api request with then and catch
   api.updateRecipe(data, recipeId)
     .then(() => {
@@ -73,6 +81,11 @@ const onUpdateRecipe = function (event) {
         .catch(ui.findRecipeFailure)
     })
     .then(ui.updateRecipeSuccess)
+    .then((e) => {
+      api.getUserRecipes()
+        .then(ui.getUserRecipesSuccess)
+        .catch(ui.getUserRecipesFailure)
+    })
     .catch(ui.updateRecipeFailure)
 }
 
@@ -81,6 +94,70 @@ const onShowUpdate = function () {
   $('.update-button').hide()
   $('.delete-button').hide()
   $('.recipe-info').hide()
+
+  $('.update-input-section').css('display', 'flex')
+}
+
+const onRecipeSearch = function () {
+  $('#filter-meal-type').val('none')
+  $('#filter-cuisine').val('none')
+
+  const searchValue = $('#search-bar').val()
+
+  const filteredRecipes = store.recipes.filter(recipe => {
+    const lowerCaseName = recipe.name.toLowerCase()
+    return lowerCaseName.includes(searchValue.toLowerCase())
+  })
+
+  $('#recipes-list span').remove()
+  ui.addRecipesToList(filteredRecipes, 'recipes-list')
+}
+
+const onFilterRecipes = function () {
+  $('#search-bar').val('')
+
+  const mealTypeFilter = $('#filter-meal-type').val()
+  const cuisineFilter = $('#filter-cuisine').val()
+
+  const filteredRecipes = store.recipes.filter(recipe => {
+    return recipe.type === mealTypeFilter || recipe.cuisine === cuisineFilter
+  })
+
+  ui.addRecipesToList(filteredRecipes, 'recipes-list')
+}
+
+const onClearFilters = function () {
+  $('#filter-meal-type').val('none')
+  $('#filter-cuisine').val('none')
+
+  ui.addRecipesToList(store.recipes, 'recipes-list')
+}
+
+const onFavoriteRecipe = function () {
+  $('#favorite-button').toggleClass('not-favorite')
+  $('#favorite-button').toggleClass('favorite')
+
+  if ($('#update-form').is(':hidden')) {
+    const isFavorite = $('#favorite-button').hasClass('favorite')
+    const data = { recipe: store.selectedRecipe }
+    data.recipe.favorite = isFavorite
+    delete data.recipe.owner
+
+    api.updateRecipe(data, data.recipe._id)
+      .then(ui.updateRecipeSuccess)
+      .catch(ui.updateRecipeFailure)
+  }
+}
+
+const onShowFavorites = function (e) {
+  $('.favorite-title').hide()
+  $('.favorite-default-message').show()
+  $('.favorite-recipe-info p').hide()
+
+  $('#create-recipes-tab').removeClass('active')
+  if (!store.recipes) {
+    onGetUserRecipes(e)
+  }
 }
 // module exports
 module.exports = {
@@ -89,5 +166,11 @@ module.exports = {
   onFindRecipe,
   onDeleteRecipe,
   onUpdateRecipe,
-  onShowUpdate
+  onShowUpdate,
+  onRecipeSearch,
+  onFavoriteRecipe,
+  onShowFavorites,
+  onFilterRecipes,
+  onClearFilters,
+  onCloseModal
 }

@@ -22,18 +22,46 @@ const submitRecipeFailure = function () {
 }
 
 const getUserRecipesSuccess = function (res) {
-  $('#recipes-list li').remove()
-  res.recipes.forEach(recipe => {
-    $('#recipes-list').prepend(`<li class="recipe-title">
-    <button type="button" class="open-recipe-button" id=${recipe._id} data-toggle="modal" data-target="#recipe-modal">
-      ${recipe.name}
-    </button></li>`)
-  })
+  $('#favorite-recipes-list span').remove()
+  store.recipes = res.recipes
+  const favoriteRecipes = res.recipes.filter(recipe => !!recipe.favorite)
+
+  addRecipesToList(res.recipes, 'recipes-list')
+  addRecipesToList(favoriteRecipes, 'favorite-recipes-list')
+
   $('#all-recipes-messaging').text('Here are your recipes!')
   $('#all-recipes-messaging').css('color', '#effce8')
   setTimeout(function () {
     $('#all-recipes-messaging').text('')
   }, 3000)
+}
+
+const addRecipesToList = function (recipes, target) {
+  $(`#${target} span`).remove()
+
+  const dataTarget = target === 'recipes-list' ? '#recipe-modal' : ''
+
+  recipes.forEach(recipe => {
+    let recipeImg
+
+    if (recipe.type === 'breakfast') {
+      recipeImg = './assets/images/breakfast-image.jpeg'
+    } else if (recipe.type === 'lunch') {
+      recipeImg = './assets/images/lunch-image.jpeg'
+    } else if (recipe.type === 'dinner') {
+      recipeImg = './assets/images/dinner-image.jpeg'
+    } else if (recipe.type === 'appetizer') {
+      recipeImg = './assets/images/app-image.jpeg'
+    } else if (recipe.type === 'dessert') {
+      recipeImg = './assets/images/dessert-image.jpeg'
+    }
+
+    $(`#${target}`).prepend(`<span class="recipe-title">
+    <button type="button" class="open-recipe-button" id=${recipe._id} data-toggle="modal" data-target=${dataTarget}>
+      <img class="recipe-img" src=${recipeImg}>
+      <p>${recipe.name}</p>
+    </button></span>`)
+  })
 }
 
 const getUserRecipesFailure = function () {
@@ -46,12 +74,16 @@ const getUserRecipesFailure = function () {
 }
 
 const findRecipeSuccess = function (res) {
+  store.selectedRecipe = res.recipe
   $('#recipe-modal-title').text(`${res.recipe.name}`)
   $('#recipe-ingredients').text(`${res.recipe.ingredients}`)
   $('#recipe-instructions').text(`${res.recipe.instructions}`)
   $('#recipe-calories').text(`${res.recipe.calories}`)
   $('#recipe-type').text(`${res.recipe.type}`)
   $('#recipe-cuisine').text(`${res.recipe.cuisine}`)
+
+  const favoriteClass = res.recipe.favorite ? 'favorite' : 'not-favorite'
+  $('#favorite-button').attr('class', favoriteClass)
 
   $('.recipe-name').val(`${res.recipe.name}`)
   $('.ingredients').val(`${res.recipe.ingredients}`)
@@ -65,6 +97,19 @@ const findRecipeSuccess = function (res) {
   setTimeout(function () {
     $('.find-recipe-messaging').text('')
   }, 3000)
+}
+
+const findFavoriteRecipeSuccess = function (res) {
+  $('.favorite-title').show()
+  $('.favorite-default-message').hide()
+  $('.favorite-recipe-info p').show()
+
+  $('#favorite-recipe-name').text(`${res.recipe.name}`)
+  $('#favorite-recipe-ingredients').text(`${res.recipe.ingredients}`)
+  $('#favorite-recipe-instructions').text(`${res.recipe.instructions}`)
+  $('#favorite-recipe-calories').text(`${res.recipe.calories}`)
+  $('#favorite-recipe-type').text(`${res.recipe.type}`)
+  $('#favorite-recipe-cuisine').text(`${res.recipe.cuisine}`)
 }
 
 const findRecipeFailure = function () {
@@ -131,5 +176,7 @@ module.exports = {
   updateRecipeSuccess,
   updateRecipeFailure,
   showUpdateSuccess,
-  showUpdateFailure
+  showUpdateFailure,
+  addRecipesToList,
+  findFavoriteRecipeSuccess
 }
