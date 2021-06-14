@@ -45,15 +45,15 @@ const addRecipesToList = function (recipes, target) {
     let recipeImg
 
     if (recipe.type === 'breakfast') {
-      recipeImg = '../../public/breakfast-image.jpeg'
+      recipeImg = 'public/breakfast-image.jpeg'
     } else if (recipe.type === 'lunch') {
-      recipeImg = '../../public/lunch-image.jpeg'
+      recipeImg = 'public/lunch-image.jpeg'
     } else if (recipe.type === 'dinner') {
-      recipeImg = '../../public/dinner-image.jpeg'
+      recipeImg = 'public/dinner-image.jpeg'
     } else if (recipe.type === 'appetizer') {
-      recipeImg = '../../public/app-image.jpeg'
+      recipeImg = 'public/app-image.jpeg'
     } else if (recipe.type === 'dessert') {
-      recipeImg = '../../public/dessert-image.jpeg'
+      recipeImg = 'public/dessert-image.jpeg'
     }
 
     $(`#${target}`).prepend(`<span class="recipe-title">
