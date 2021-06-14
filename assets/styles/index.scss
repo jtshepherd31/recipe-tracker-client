@@ -323,13 +323,13 @@ input, select {
 }
 
 .not-favorite {
-  background-image: url("../../public/star-4-24.png");
+  background-image: url("public/star-4-24.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .favorite {
-  background-image: url("../../public/star-24.png");
+  background-image: url("public/star-24.png");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -340,7 +340,7 @@ input, select {
 }
 
 #search-bar {
-  background-image: url("../../public/search-9-16.png");
+  background-image: url("public/search-9-16.png");
   background-repeat: no-repeat;
   background-position: 10px;
   height: 33px;
