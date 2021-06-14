@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RecipeDB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body>
+  <!-- create layout of divs -->
+  <!-- add sign in screen that disappears after sign in -->
+  <section id="before-sign-in">
+    <div id="sign-in-screen">
+      <div class="welcome">
+        <h1>Welcome To Your Recipe Database</h1>
+        <h2>Please Sign In To Get Started</h2>
+      </div>
+      <div class="sign-in-button">
+        <button type="button" class="btn btn-5" data-toggle="modal" data-target="#sign-in-modal">
+          Sign In
+        </button>
+      </div>
+      <p id="sign-out-messaging" class="sign-out-success"></p>
+      <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+              <form id="sign-in">
+                <div>
+                  <p id="failure-sign-in-messaging"></p>
+                </div>
+                <h4>Sign In!</h4>
+                <hr width="90%" color="#425252">
+                <div class="form-group">
+                  <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input name="credentials[password]" required type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <button id="sign-in-submit" class="submit-button" type="submit">Sign in</button>
+                </div>
+              </form>
+              <br>
+              <form id="sign-up">
+                <h4>Sign Up!</h4>
+                <hr width="90%" color="#425252">
+                <div class="form-group">
+                  <input name="credentials[email]" required type="text" class="form-control" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                  <input name="credentials[password]" required type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input name="credentials[password_confirmation]" type="password" class="form-control" placeholder="Confirm Password">
+                </div>
+                <div class="form-group">
+                  <button class="submit-button" type="submit">Sign up</button>
+                  <p id="sign-up-messaging"></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="after-sign-in">
+
+    <div class="nav-bar">
+      <div class="sign-in-success">
+        <p id="success-sign-in-messaging">
+        </p>
+      </div>
+      <div class="main-title">
+        <h1 class="page-title">Recipe<strong>DB</strong></h1>
+      </div>
+      <div class="nav-bar-buttons">
+        <button id="sign-out" class="submit-button nav-button" type="submit">Sign Out</button>
+        <button type="button" id="change-password-button" class="submit-button nav-button" data-toggle="modal" data-target="#myModal">Change Password</button>
+      </div>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-title">Change Password</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="change-password">
+                <div class="form-group">
+                    <input name="passwords[old]" required type="password" class="form-control" placeholder="Old Password">
+                </div>
+                <div class="form-group">
+                    <input name="passwords[new]" required type="password" class="form-control" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                  <button class="submit-button" type="submit">Submit</button>
+                  <p id="change-password-messaging"></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-panel">
+      <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" id="create-recipes-tab">
+            <a href="#create-a-recipe" role="tab" data-toggle="tab">
+              Create a Recipe
+            </a>
+            </li>
+          <li role="presentation" id="recipes-tab">
+            <a href="#recipes" role="tab" data-toggle="tab">
+              Recipes
+            </a>
+          </li>
+          <li role="presentation" id="favorite-tab">
+            <a href="#favorite-recipes" role="tab" data-toggle="tab">
+              Favorite Recipes
+            </a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane in active" id="create-a-recipe">
+            <form class="create-a-recipe">
+              <h1>Create a Recipe!</h1>
+              <section class="form-fields">
+                <section class="form-fields-group">
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Recipe Name</h5>
+                    <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
+                  </div>
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Calorie Amount</h5>
+                    <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
+                  </div>
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Meal Type</h5>
+                    <select name="recipe[type]" class="meal-type">
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="dessert">Dessert</option>
+                      <option value="appetizer">Appetizer</option>
+                    </select>
+                  </div>
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Cuisine Type</h5>
+                    <select name="recipe[cuisine]" class="cuisine">
+                      <option value="american">American</option>
+                      <option value="asian">Asian</option>
+                      <option value="caribbean">Caribbean</option>
+                      <option value="italian">Italian</option>
+                      <option value="mediterranean">Mediterranean</option>
+                      <option value="mexican">Mexican</option>
+                      <option value="southern">Southern</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </section>
+                <section class="form-fields-group">
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Ingredients</h5>
+                    <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
+                  </div>
+                  <div class="cr-inputs">
+                    <h5 class="input-title">Instructions</h5>
+                    <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
+                  </div>
+                </section>
+              </section>
+              <div class="cr-inputs">
+                <button type="submit" class="submit-recipe">Submit</button>
+              </div>
+              <h4 id="create-message"></h4>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="recipes">
+            <div class="index-recipes">
+              <div class="filter-column">
+                <h2 class="find-title">Find Your Recipes</h2>
+                <div class="search-area">
+                  <input type="text" id="search-bar" placeholder="Search" />
+                  <button type="submit" class="search-button submit-button">Search</button>
+                </div>
+                <p class="search-text">OR</p>
+                <select id="filter-cuisine" class="filter-select">
+                  <option class="select-default-value" value="none" selected disabled hidden>Select a Cuisine</option>
+                  <option value="american">American</option>
+                  <option value="asian">Asian</option>
+                  <option value="caribbean">Caribbean</option>
+                  <option value="italian">Italian</option>
+                  <option value="mediterranean">Mediterranean</option>
+                  <option value="mexican">Mexican</option>
+                  <option value="southern">Southern</option>
+                  <option value="other">Other</option>
+                </select>
+                <select id="filter-meal-type" class="filter-select">
+                  <option class="select-default-value" value="none" selected disabled hidden>Select a Meal Type</option>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                  <option value="dessert">Dessert</option>
+                  <option value="appetizer">Appetizer</option>
+                </select>
+                <div>
+                  <button id="filter-button" type="submit" class="filter-button submit-button">Filter</button>
+                  <button id="clear-filter-button" type="submit" class="filter-button submit-button">Clear Filters</button>
+                </div>
+              </div>
+              <div class="main-column">
+                <div>
+                  <h4 id="delete-messaging"></h4>
+                </div>
+                <div class="filtered-recipes">
+                  <h2 class="find-title">Click to see a Recipe</h2>
+                  <div id="recipes-list"></div>
+                </div>
+              </div>
+              <div class="modal fade" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header x">
+                      <h4 class="modal-title" id="recipe-modal-title"></h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-header title">
+                      <button id="favorite-button"></button>
+                      <div class="edit-buttons">
+                        <button class="delete-button">
+                          <img src="public/trash-2-16.png">
+                        </button>
+                        <button class="update-button">
+                          <img src="public/pencil-2-16.png">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="modal-body">
+                      <div class="edit-section">
+                        <h4 id="update-messaging"></h4>
+                      </div>
+                      <section class="recipe-info">
+                        <div class="recipe-info-top">
+                          <h5>Type</h5>
+                          <p id="recipe-type"></p>
+                          <h5>Calories</h5>
+                          <p id="recipe-calories"></p>
+                          <h5>Cuisine</h5>
+                          <p id="recipe-cuisine"></p>
+                        </div>
+                        <div>
+                          <h5>Ingredients</h5>
+                          <p id="recipe-ingredients"></p>
+                          <h5>Instructions</h5>
+                          <p id="recipe-instructions"></p>
+                        </div>
+                      </section>
+                      <form id="update-form">
+                        <section class="update-input-section">
+                          <div class="update-inputs">
+                            <div class="cr-inputs">
+                              <h5>Recipe Name</h5>
+                              <input name= "recipe[name]" type="text" required class="recipe-name" placeholder="Recipe Name">
+                            </div>
+                            <div class="cr-inputs">
+                              <h5>Calorie Amount</h5>
+                              <input name= "recipe[calories]" class="calories" type="text" placeholder="Calorie Amount">
+                            </div>
+                            <div class="cr-inputs">
+                              <h5>Meal Type</h5>
+                              <select name="recipe[type]" class="meal-type">
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="appetizer">Appetizer</option>
+                              </select>
+                            </div>
+                            <div class="cr-inputs">
+                              <h5>Cuisine Type</h5>
+                              <select name="recipe[cuisine]" class="cuisine">
+                                <option value="american">American</option>
+                                <option value="asian">Asian</option>
+                                <option value="caribbean">Caribbean</option>
+                                <option value="italian">Italian</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="mexican">Mexican</option>
+                                <option value="southern">Southern</option>
+                                <option value="other">Other</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="update-inputs">
+                            <div class="cr-inputs">
+                              <h5>Ingredients</h5>
+                              <textarea name="recipe[ingredients]" type="text" required class="ingredients" placeholder="Ingredients List"></textarea>
+                            </div>
+                            <div class="cr-inputs">
+                              <h5>Instructions</h5>
+                              <textarea name= "recipe[instructions]" type="text" required class="instructions" placeholder="Cooking Instructions"></textarea>
+                            </div>
+                          </div>
+                        </section>
+                        <div class="cr-inputs">
+                          <button type="submit" id="submit-update">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="favorite-recipes">
+            <h2 id="fav-tab-title">Favorite Recipes</h2>
+            <div class="favorites-container">
+              <section class="favorite-recipe-info filter-column">
+                <h3 class="favorite-default-message">Select a Favorite to View the Recipe</h3>
+                <h5 class="input-title favorite-title">Name</h5>
+                <p id="favorite-recipe-name"></p>
+                <h5 class="input-title favorite-title">Ingredients</h5>
+                <p id="favorite-recipe-ingredients"></p>
+                <h5 class="input-title favorite-title">Instructions</h5>
+                <p id="favorite-recipe-instructions"></p>
+                <h5 class="input-title favorite-title">Calories</h5>
+                <p id="favorite-recipe-calories"></p>
+                <h5 class="input-title favorite-title">Type</h5>
+                <p id="favorite-recipe-type"></p>
+                <h5 class="input-title favorite-title">Cuisine</h5>
+                <p id="favorite-recipe-cuisine"></p>
+              </section>
+              <div class="favorites-list main-column">
+                <div id="favorite-recipes-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
