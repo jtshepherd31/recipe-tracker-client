@@ -45,15 +45,15 @@ const addRecipesToList = function (recipes, target) {
     let recipeImg
 
     if (recipe.type === 'breakfast') {
-      recipeImg = './assets/images/breakfast-image.jpeg'
+      recipeImg = './../../../public/breakfast-image.jpeg'
     } else if (recipe.type === 'lunch') {
-      recipeImg = './assets/images/lunch-image.jpeg'
+      recipeImg = './../../../public/lunch-image.jpeg'
     } else if (recipe.type === 'dinner') {
-      recipeImg = './assets/images/dinner-image.jpeg'
+      recipeImg = './../../../public/dinner-image.jpeg'
     } else if (recipe.type === 'appetizer') {
-      recipeImg = './assets/images/app-image.jpeg'
+      recipeImg = './../../../public/app-image.jpeg'
     } else if (recipe.type === 'dessert') {
-      recipeImg = './assets/images/dessert-image.jpeg'
+      recipeImg = './../../../public/dessert-image.jpeg'
     }
 
     $(`#${target}`).prepend(`<span class="recipe-title">
@@ -125,7 +125,7 @@ const deleteRecipeSuccess = function (recipeId) {
   $('#delete-messaging').text('Recipe deleted.')
   $('#delete-messaging').css('color', '#effce8')
   setTimeout(function () {
-    $('#delete-recipe-messaging').text('')
+    $('#delete-messaging').text('')
   }, 3000)
 }
 

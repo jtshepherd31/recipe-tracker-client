@@ -53,7 +53,6 @@ const onCloseModal = function () {
 const onDeleteRecipe = function (event) {
   // prevent default
   event.preventDefault()
-  console.log(event.target)
   // api request with then and catch
   api.deleteRecipe(store.selectedRecipe._id)
     .then(ui.deleteRecipeSuccess)
@@ -155,9 +154,8 @@ const onShowFavorites = function (e) {
   $('.favorite-recipe-info p').hide()
 
   $('#create-recipes-tab').removeClass('active')
-  if (!store.recipes) {
-    onGetUserRecipes(e)
-  }
+
+  onGetUserRecipes(e)
 }
 // module exports
 module.exports = {

@@ -33,7 +33,6 @@ const findRecipe = function (recipeId) {
 }
 
 const updateRecipe = function (data, recipeId) {
-  console.log(data)
   return $.ajax({
     method: 'PATCH',
     data,

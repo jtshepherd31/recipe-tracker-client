@@ -18,7 +18,6 @@ const signIn = function (data) {
 }
 
 const changePassword = function (data) {
-  console.log(data)
   return $.ajax({
     method: 'PATCH',
     data,

@@ -18,4 +18,4 @@ store them so I can eat what I want and modify recipes as needed.
 ![image](https://i.imgur.com/jRFZfjA.png)
 
 ### Deploy Link
-https://github.com/jtshepherd31/recipe-tracker-client
+https://jtshepherd31.github.io/recipe-tracker-client/
